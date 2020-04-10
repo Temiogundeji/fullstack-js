@@ -2,8 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.listen(3000, () => console.log('server running at 3000'));
-
 app.use((req, res, next) =>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -33,3 +31,4 @@ app.get('/data', (req, res)=>{
     res.json(payload2);
 });
 
+app.listen(3000, () => console.log('server running at 3000'));
