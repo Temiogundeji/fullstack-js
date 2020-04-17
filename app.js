@@ -11,24 +11,23 @@ app.use((req, res, next) =>{
 
 app.use(bodyParser.json());
 
-let payload = {status: 'success'}
+let payload = null;
 app.get('/', (req, res) =>{
-    res.json(payload);
+    payload = req.body;
+    res.json({status:"success"});
 });
 
-let payload2 =  {data: "My favorite data"};
 app.post('/data', (req, res) =>{
-    req.body = payload2;
-    // payload2 = req.body;
-    res.json(payload2);
-    console.log(payload2);
+    payload = req.body;
+    res.json(payload);
+    console.log(payload);
     res.status(201).json({
-        message: 'Data created successfully!'
+        message: 'Data created successfully!',data:payload
     });
 });
 
 app.get('/data', (req, res)=>{
-    res.json(payload2);
+    res.json({success:"true", message:"Data returned successfully!"});
 });
 
 app.listen(3000, () => console.log('server running at 3000'));

@@ -1,10 +1,11 @@
 {
   "name": "week-1-project",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "A repository to learn Fullstack Javascript",
+  "main": "app.js",
   "dependencies": {
-    "express": "~4.16.1"
+    "express": "~4.16.1",
+    "nodemon": "^2.0.3"
   },
   "devDependencies": {},
   "scripts": {
@@ -12,5 +13,13 @@
     "start": "node server.js"
   },
   "author": "temiogundeji",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Temiogundeji/fullstack-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Temiogundeji/fullstack-js/issues"
+  },
+  "homepage": "https://github.com/Temiogundeji/fullstack-js#readme"
 }
