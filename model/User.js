@@ -1,31 +1,24 @@
-const sequelize = require('./DB');
+const Sequelize = require('sequelize');
+const DataTypes = Sequelize.DataTypes;
+const sequelize = new Sequelize('userdb','temiogundeji','Temilorun123', {
+    host:'localhost',
+    dialect:'postgres',
+});
 
-const Model = sequelize.Model;
-class User extends Model{}
-
-User.init({
-    email:{
-        unique:true,
-        type: sequelize.STRING,
-        allowNull:false,
-        validate:{
-            isEmail:true,
-            notNull:{
-                msg: "Please enter a valid email!"
-            }
+    const User = sequelize.define('user', {
+        email: {
+            type:DataTypes.STRING,
+            unique:true,
+            allowNull:false
+        },
+        password:{
+            type:DataTypes.STRING,
+            allowNull:false
         }
+    });
 
-    },
-    password:{
-        type:sequelize.STRING,
-        allowNull:false,
-        validate: {
-            notNull: {
-                msg:"Please enter a password!"
-            }
-        }
-    }
-}, { sequelize });
+    User.sync({ force:true });
 
+    return User;
 
-
+module.exports = User;

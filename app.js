@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const logger = require('morgan');
+const userController = require('./controllers/user.controller');
+const userRoutes = require('./routes/user.routes');
 
 app.use((req, res, next) =>{
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,25 +12,8 @@ app.use((req, res, next) =>{
     next();
 });
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
-
-let payload = null;
-app.get('/', (req, res) =>{
-    payload = req.body;
-    res.json({status:"success"});
-});
-
-app.post('/data', (req, res) =>{
-    payload = req.body;
-    res.json(payload);
-    console.log(payload);
-    res.status(201).json({
-        message: 'Data created successfully!',data:payload
-    });
-});
-
-app.get('/data', (req, res)=>{
-    res.json({success:"true", message:"Data returned successfully!"});
-});
+app.use('/user', userRoutes);
 
 app.listen(3000, () => console.log('server running at 3000'));
