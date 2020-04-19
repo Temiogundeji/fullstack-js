@@ -1,8 +1,6 @@
 const User = require('../model/User');
-const queries = {
+module.exports  = {
     getUserByEmail: function (email) {
        return User.findOne({ where: {'email': email}})
     }
 }
-
-module.exports = queries;

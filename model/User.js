@@ -5,20 +5,22 @@ const sequelize = new Sequelize('userdb','temiogundeji','Temilorun123', {
     dialect:'postgres',
 });
 
-    const User = sequelize.define('user', {
-        email: {
-            type:DataTypes.STRING,
-            unique:true,
-            allowNull:false
-        },
-        password:{
-            type:DataTypes.STRING,
-            allowNull:false
-        }
-    });
+const User = sequelize.define('user', {
+    email: {
+        type:DataTypes.STRING,
+        unique:true,
+        allowNull:false
+    },
+    password:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
+});
 
-    User.sync({ force:true });
+sequelize.sync().then(() => {
+    console.log('Userdb and user table has been created successfully!');
+});
 
-    return User;
-
+    
+    
 module.exports = User;
