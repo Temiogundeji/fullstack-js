@@ -4,10 +4,10 @@ const app = express();
 const logger = require('morgan');
 var cors = require('cors');
 var passport = require('passport');
-const userController = require('./controllers/user.controller');
-const userLoginRoute = require('./routes/userLogin');
-const userRegisterRoute = require('./routes/userRegister');
-require('./config/jwtConfig')
+
+const login = require('./controllers/user-login.controller');
+const signup = require('./controllers/user-signup.controller');
+
 require('./config/passport');
 
 
@@ -22,14 +22,11 @@ app.use(cors);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(bodyParser.json());
-
-require('./routes/userLogin')(app);
-require('./routes/userRegister')(app);
-
-// app.use('/user', userLoginRoute);
-// app.use('/user', userRegisterRoute);
 app.use(passport.initialize());
 
-
+app.get('/user', login);
+app.post('/user', signup);
 
 app.listen(3000, () => console.log('server running at 3000'));
+
+module.exports = app;

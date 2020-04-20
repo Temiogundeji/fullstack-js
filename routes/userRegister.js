@@ -1,11 +1,11 @@
-// const express = require('express');
+const express = require('express');
 // const router = express.Router();
 const passport = require('passport');
 const User = require('../model/User');
 
 module.exports = (app)=> {
 
-    app.post('/signup', (req, res, next) => {
+    app.post('user/signup', (req, res, next) => {
         passport.authenticate('signup', (err, user, info) => {
             if(err){
                 console.log(err);

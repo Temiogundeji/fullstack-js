@@ -1,4 +1,3 @@
-
 var jwtSecret = require('./jwtConfig');
 var bcrypt = require('bcrypt');
 
@@ -19,7 +18,7 @@ passport.use(
         passwordField: 'password',
         session: false
     },
-    //emai and passwor are decoded jwt payload!
+    
     (email, password, done) => {
         try {
             User.findOne({

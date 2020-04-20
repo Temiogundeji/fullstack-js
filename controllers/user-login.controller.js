@@ -1,16 +1,10 @@
-// const router = require('express').Router;
 const User = require('../model/User');
 const jwtSecretkey = require('../config/jwtConfig');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-
-module.exports = (app)=> {
-    app.get('/', (req, res) => {
-        res.send('Hurray I\'m working');
-    })
-
-    app.get('user/login', (req, res, next) => {
+const login = () =>{
+    app.get('/login', (req, res, next) => {
         passport.authenticate('login', (err, user, info) => {
             if(err){
                 console.log(err);
@@ -39,3 +33,5 @@ module.exports = (app)=> {
         })(req, res, next);
     });
 }
+   
+module.exports = login;
