@@ -3,7 +3,7 @@ const User = require('../model/User');
 const jwtSecretkey = require('../config/jwtConfig');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-
+const dotenv = require('dotenv');
 module.exports = (app) =>{
     app.get('loginUser', (req, res, next) => {
         passport.authenticate('login', (err, user, info) => {

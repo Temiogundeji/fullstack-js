@@ -1,3 +1,4 @@
+
 var jwtSecret = require('./jwtConfig');
 var bcrypt = require('bcrypt');
 
@@ -87,16 +88,13 @@ passport.use(
     )
 );
 
-// const opts = {
-//     jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('JWT'),
-//     secretOrKey: jwtSecret.secret
-// }
+// require('dotenv').config();
+const opts = {
+    jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('JWT'),
+    secretOrKey: jwtSecret
+};
 
-const opts = {};
-opts.jwtFromRequest = ExtractJWT.fromAuthHeaderWithScheme('JWT');
-opts.secretOrKey = jwtSecret.secret;
-
-
+ console.log(opts);
 passport.use(
     'jwt',
     new JWTStrategy(opts, (jwt_payload, done) => {

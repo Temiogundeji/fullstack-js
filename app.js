@@ -7,6 +7,7 @@ var passport = require('passport');
 const userController = require('./controllers/user.controller');
 const userLoginRoute = require('./routes/userLogin');
 const userRegisterRoute = require('./routes/userRegister');
+require('./config/jwtConfig')
 require('./config/passport');
 
 
