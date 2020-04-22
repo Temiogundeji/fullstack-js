@@ -1,32 +1,28 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
+const bodyParser = require('body-parser');
 const logger = require('morgan');
-var cors = require('cors');
-var passport = require('passport');
+const passport = require('passport');
+const routes = require('./routes/routes');
 
-const login = require('./controllers/user-login.controller');
-const signup = require('./controllers/user-signup.controller');
-
-require('./config/passport');
+const PORT = 3000;
+require('./controller/auth');
 
 
-app.use((req, res, next) =>{
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    next();
-});
-
-app.use(cors);
-app.use(logger('dev'));
 app.use(express.json());
 app.use(bodyParser.json());
+app.use( bodyParser.urlencoded({ extended: true }) );
+app.use(logger('dev'));
 app.use(passport.initialize());
 
-app.get('/user', login);
-app.post('/user', signup);
+app.use((err, req, res, next) => {
+    res.status( err.status || 500 );
+    res.json({ error: err });
+});
 
-app.listen(3000, () => console.log('server running at 3000'));
+app.use('/user', routes);
 
-module.exports = app;
+
+app.listen(PORT, ()=>{
+    console.log(`App running at ${PORT}`);
+})
