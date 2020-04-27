@@ -8,14 +8,25 @@ const routes = require('./routes/routes');
 const PORT = 3000;
 require('./controller/auth');
 require('dotenv').config();
-const secretKey = process.env.SECRET_KEY;
-console.log(secretKey);
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use( bodyParser.urlencoded({ extended: true }) );
-app.use(logger('dev'));
 app.use(passport.initialize());
+
+if(process.env.NODE_ENV !== 'test'){
+    app.use(logger('dev'));
+}
+
+if(app.get('dev') === 'development'){
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.json({
+            message: err.message,
+            error: err
+        });
+    });
+}
 
 app.get('/', (req, res) => {
     res.json({ message: 'success', mood: 'Thankful'});
