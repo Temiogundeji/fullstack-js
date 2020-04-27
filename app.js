@@ -18,7 +18,7 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 
 app.get('/', (req, res) => {
-    res.json({ message: 'success'});
+    res.json({ message: 'success', mood: 'Thankful'});
 });
 
 const data = { name: 'Yusuff Ogundeji', marital_status: 'single and searching...', about: 'Fullstack Developer || Startup Enthusiast'};

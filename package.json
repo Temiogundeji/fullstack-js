@@ -26,7 +26,7 @@
     "nodemon": "^2.0.3"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --timeout 100000 \"./tests/**/!(*.skip).js\" --exit",
     "start": "nodemon app.js"
   },
   "author": "temiogundeji",
