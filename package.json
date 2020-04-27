@@ -5,6 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "curl": "^0.1.4",
     "dotenv": "^8.2.0",
@@ -19,10 +21,12 @@
     "sequelize": "^5.21.6"
   },
   "devDependencies": {
+    "chai": "*",
+    "mocha": "^7.1.2",
     "nodemon": "^2.0.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon app.js"
   },
   "author": "temiogundeji",
