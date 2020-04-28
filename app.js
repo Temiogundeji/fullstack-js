@@ -34,8 +34,8 @@ app.get('/', (req, res) => {
 
 const data = { name: 'Yusuff Ogundeji', marital_status: 'single and searching...', about: 'Fullstack Developer || Startup Enthusiast'};
 app.post('/data', (req, res) => {
-    req.body = data;
-    res.json({ message: 'User added successfully', user: data});
+    data = req.body;
+    res.json({ message: 'Message successful!', status:res.statusCode, user: data });
 });
 
 app.get('/data', (req, res) => {
