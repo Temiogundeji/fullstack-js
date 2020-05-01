@@ -32,10 +32,26 @@ app.get('/', (req, res) => {
     res.json({ message: 'success', mood: 'Thankful'});
 });
 
-const data = { name: 'Yusuff Ogundeji', marital_status: 'single and searching...', about: 'Fullstack Developer || Startup Enthusiast'};
+let data = { name:'Ogundeji Yusuff', ms: 'Single and searching', about: 'I love to code' };
 app.post('/data', (req, res) => {
     data = req.body;
-    res.json({ message: 'Message successful!', status:res.statusCode, user: data });
+    if(!data || !req.body.name || !req.body.ms || !req.body.about){
+        res.status(400).json({ message: 'Invalid user data passed', status:res.statusCode })
+    }
+    else {
+        res.status(200).json({ message:'successful', status: res.statusCode });
+     }
+
+
+    // let props = Object.keys(req.body);
+    // for(let prop in props){
+    //     if(prop){
+    //         res.status(200);
+    //     }
+    //     else{
+    //         res.status(400);
+    //     }
+    // }
 });
 
 app.get('/data', (req, res) => {
