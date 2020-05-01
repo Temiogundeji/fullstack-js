@@ -56,14 +56,28 @@ describe('/post tests', function() {
         .send(data)
         .end((err, res) => {
             expect(res.status).to.equal(400);
+            res.body.should.have.property('message').equal('Invalid user data passed');
             done();
         });
     });
-    if('should return a status code 200 when data is received successfully!', (done) => {
+    it('should return status code 400 when string is pass as data', (done) => {
+        let data = "";
+        chai.request(app)
+        .post('/data')
+        .send(data)
+        .end((err, res) => {
+            expect(res.status).to.equal(400);
+            res.body.should.have.property('message').equal('Invalid user data passed');
+            done();
+        });
+    });
+    it('should return a status code 200 when data is received successfully!', (done) => {
         chai.request(app)
         .get('/data')
         .end((err, res) => {
             expect(res.status).to.equal(200);
+            res.body.should.have.property('message').equal('User retrieved successfully');
+            done();
         });
     });
-})
+});
