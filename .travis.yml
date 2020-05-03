@@ -14,7 +14,7 @@ env:
     -CODECOV_TOKEN="93e09daf-902b-4e07-a341-7ce3b618d6a8"
     -NODE_ENV=test
 before_script:
-  - psql -c 'create database userdb;' -U temiogundeji
+  - psql -c 'create database userdb;' -U postgres
   - psql -c "CREATE USER temiogundeji WITH PASSWORD Temilorun123;" -U temiogundeji
   - npm run build
 script:
