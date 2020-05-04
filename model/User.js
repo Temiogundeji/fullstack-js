@@ -17,6 +17,13 @@ const User = sequelize.define('user', {
     }
 });
 
+const validatePassword = (password) => {
+    const user = User;
+    
+    const compare = bcrypt.compare(password, user.password);
+    return compare;
+}
+
 sequelize.sync().then(() => {
     console.log('Userdb and user table has been created successfully!');
 });
