@@ -14,10 +14,7 @@ env:
   global:
     -CODECOV_TOKEN="93e09daf-902b-4e07-a341-7ce3b618d6a8"
     -NODE_ENV=test
-<<<<<<< HEAD
 
-=======
   - npm run build
->>>>>>> c3c15b36c0127fbe83fbe7bb83c281188343e1f1
 script:
   -npm test
