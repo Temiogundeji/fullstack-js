@@ -20,7 +20,12 @@ passport.use('signup', new localStrategy(
             })
             .then(user => {
                 if(user){
-                    console.log('user already exists!');
+                    try{
+                        console.log('User already exists!');
+                    }
+                    catch(err){
+                        done(err);
+                    }
                 }
                 else{
                     bcrypt.hash(password, BCRYPT_SALT_R)
@@ -49,7 +54,7 @@ passport.use('login', new localStrategy({
             where: {
                 email:email
             }       
-        })
+        })  
         .then(user => {
             if(!user){
                 return done(null, false, {message: 'User not found'});

@@ -10,11 +10,16 @@ router.post('/signup', passport.authenticate('signup', {session: false}), (req, 
    const token = jwt.sign({ user: body }, process.env.SECRET_KEY);
    console.log(process.env.SECRET_KEY);
 
+   try{
     res.json({
         message:'Signup successful',
         user:req.user,
         session: token
     })
+   }
+   catch(err){
+       res.json({error:err, message: 'Signup successful!'});
+   }
 });
 
 router.post('/login', (req, res, next) => {
@@ -32,11 +37,12 @@ router.post('/login', (req, res, next) => {
                 const body = {id: id, email:email };
                 const token = jwt.sign({ user: body}, process.env.SECRET_KEY);
                 
-                res.json({ session: token })
+                res.json({ session: token, message: 'User login successful!'})
             });
        }
        catch(err){
-           return next(err);
+        //    return next(err);
+        res.json({error: err, message: 'User login unsuccessful!'});
        }
     })(req, res, next)
 });
