@@ -32,7 +32,7 @@ passport.use('signup', new localStrategy(
                     bcrypt.hash(password, BCRYPT_SALT_R)
                     .then(hashed => {
                         User.create({email: email, password: hashed}).then( user => {
-                            return done(null, user);
+                            return done(null, user, {message: 'User created successfully!'});
                             
                         })
                     })
@@ -49,24 +49,29 @@ passport.use('signup', new localStrategy(
 passport.use('login', new localStrategy({
     usernameField: 'email',
     passwordField: 'password'
-}, async(email, password, done) => {
+}, (email, password, done) => {
     
     try{
-       const user = await User.findOne({
+       User.findOne({
             where: {
                 email:email
             }       
-        }); 
-        const validatePwd = await bcrypt.compare(user.password, password);
-        if(!user){
-            return done(null, false, {message: 'User not found!'});
-        }
-        if(!validatePwd){
-            return done(null, false, {message: 'Wrong Password!'});
-        }
-        else{
-            return done(null, user, {message: 'Logged in successfully!'});
-        }
+        })
+        .then(user => {
+            let hashPassword = bcrypt.hash(password, BCRYPT_SALT_R);
+            console.log(hashPassword);
+            if(!user){
+                return done(null, false, {message: 'User not found'});
+            }
+            else{
+                
+                const validPwd = bcrypt.compare(user.password, password);
+                if(!validPwd) {
+                    return done(null, false, {message: 'Wrong password'});
+                }
+                return done(null, user, {message: 'Logged in successfully'});
+            }
+        })
     }
     catch(err){
         console.error(err);
