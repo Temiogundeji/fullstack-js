@@ -13,7 +13,6 @@ branches:
   - wk3
 env:
   global:
-    -CODECOV_TOKEN="93e09daf-902b-4e07-a341-7ce3b618d6a8"
     -NODE_ENV=test
 
   - npm run build
