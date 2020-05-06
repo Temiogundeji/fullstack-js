@@ -26,18 +26,16 @@ router.post('/login', (req, res, next) => {
     passport.authenticate('login', (err, user, info) => {
        try{
             if(err || !user){
-                const error = new Error('An error occured');
-                return next(error);
+               const error = new Error('Login parameters incorrect!');
+               return next(error);
             }
             req.login(user, {session: false}, (error) => {
-                if(error){
-                    return next(error);
-                }
+                if(error) return next(error);
+
                 const { id, email } = user;
                 const body = {id: id, email:email };
                 const token = jwt.sign({ user: body}, process.env.SECRET_KEY);
                 
-                res.json({ session: token, message: 'User login successful!'})
             });
        }
        catch(err){

@@ -1,8 +1,8 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-const User = require('../model/User');
+// const User = require('../model/User');
+const SeqModel = require('../model/Config')
 const bcrypt = require('bcrypt');
-const validatePwd = require('../utils/model-hooks');
 require('dotenv').config();
 const BCRYPT_SALT_R = 12;
 
@@ -14,7 +14,7 @@ passport.use('signup', new localStrategy(
     },
     (email, password, done) => {
         try {
-            User.findOne({
+            SeqModel.User.findOne({
                 where: {
                     email: email
                 }
@@ -31,7 +31,7 @@ passport.use('signup', new localStrategy(
                 else{
                     bcrypt.hash(password, BCRYPT_SALT_R)
                     .then(hashed => {
-                        User.create({email: email, password: hashed}).then( user => {
+                        SeqModel.User.create({email: email, password: hashed}).then( user => {
                             return done(null, user, {message: 'User created successfully!'});
                             
                         })
@@ -49,29 +49,42 @@ passport.use('signup', new localStrategy(
 passport.use('login', new localStrategy({
     usernameField: 'email',
     passwordField: 'password'
-}, (email, password, done) => {
-    
+}, async(email, password, done) => {
     try{
-       User.findOne({
-            where: {
-                email:email
-            }       
-        })
-        .then(user => {
-            let hashPassword = bcrypt.hash(password, BCRYPT_SALT_R);
-            console.log(hashPassword);
-            if(!user){
-                return done(null, false, {message: 'User not found'});
+       const user = await SeqModel.User.findOne({ where: { email:email } });
+        if(!user){
+            return done(null, falase, {message: 'User not found!'})
+        }
+
+        bcrypt.compare(password, user.password)
+        .then((res) => {
+            if(res === true) {
+                return done(null, user, {message: 'Logged in successfully!'});
             }
             else{
-                
-                const validPwd = bcrypt.compare(user.password, password);
-                if(!validPwd) {
-                    return done(null, false, {message: 'Wrong password'});
-                }
-                return done(null, user, {message: 'Logged in successfully'});
+                return done(null, false, {message: 'Wrong password!'});
             }
-        })
+        });
+        // const isValidPassword = await user.comparePassword(password);
+
+        // if(isValidPassword) {
+        //     return done(null, false, {message: 'Wrong password!'});
+        // }
+        // else{
+        //     return done(null, user, {message: 'Logged in successfully!'});
+        // }
+
+        // .then(user => {
+        //     if(!user){
+        //         return done(null, false, {message: 'User not found'});
+        //     }
+        //     else{
+        //         if(!user.comparePassword(password)) {
+        //             return done(null, false, {message: 'Wrong password'});
+        //         }
+        //         return done(null, user, {message: 'Logged in successfully'});
+        //     }
+        // })
     }
     catch(err){
         console.error(err);

@@ -1,31 +1,22 @@
-const Sequelize = require('sequelize');
-const DataTypes = Sequelize.DataTypes;
-const sequelize = new Sequelize('userdb','temiogundeji','Temilorun123', {
-    host:'localhost',
-    dialect:'postgres',
-});
-
-const User = sequelize.define('user', {
-    email: {
-        type:DataTypes.STRING,
-        unique:true,
-        allowNull:false
+module.exports  = (sequelize, type) => {
+    return sequelize.define('user', {
+        email: {
+            type: type.STRING,
+            unique:true,
+            allowNull:false,
+            isEmail:true
+        },
+        password:{
+            type: type.STRING,
+            allowNull:false
+        }
     },
-    password:{
-        type:DataTypes.STRING,
-        allowNull:false
+    {
+        instanceMethods: {
+            comparePassword : (password) => {
+                return bcrypt.compare(password, this.password);
+            }
+        }
     }
-});
-
-const validatePassword = (password) => {
-    const user = User;
-    
-    const compare = bcrypt.compare(password, user.password);
-    return compare;
+    );
 }
-
-sequelize.sync().then(() => {
-    console.log('Userdb and user table has been created successfully!');
-});
-    
-module.exports = User;
