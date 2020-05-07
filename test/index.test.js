@@ -5,7 +5,7 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect;
-// const checkStatus = require('./index.test.hooks').checkStatus;
+
 chai.use(chaiHttp);
 describe('Testing status code and response type', () =>{
     it('should return a response code 200 and response type json', (done) => {

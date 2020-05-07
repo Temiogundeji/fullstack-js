@@ -13,7 +13,7 @@ sequelize.sync()
     .then(() => {
         console.log('Database and Tables created!');
 });
-
+console.log(process.env.DB_NAME,process.env.DB_USER, process.env.DB_PKEY);
 module.exports = {
     User
 }
