@@ -9,10 +9,5 @@ install:
   - npm install -g codecov
 services:
   - postgresql
-env:
-  global:
-    -NODE_ENV=test
-    -CODECOV_TOKEN="93e09daf-902b-4e07-a341-7ce3b618d6a8"
-  - npm run build
 script:
-  -npm test
+  - npm test
