@@ -6,8 +6,3 @@ cache:
     - "node_modules"
 install:
   - npm install
-  - npm install -g codecov
-services:
-  - postgresql
-script:
-  - npm test

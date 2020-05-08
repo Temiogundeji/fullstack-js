@@ -26,7 +26,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "mocha --timeout 20000",
     "dev": "nodemon app.js",
     "start": "node app.js"
   },

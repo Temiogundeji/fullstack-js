@@ -65,26 +65,6 @@ passport.use('login', new localStrategy({
                 return done(null, false, {message: 'Wrong password!'});
             }
         });
-        // const isValidPassword = await user.comparePassword(password);
-
-        // if(isValidPassword) {
-        //     return done(null, false, {message: 'Wrong password!'});
-        // }
-        // else{
-        //     return done(null, user, {message: 'Logged in successfully!'});
-        // }
-
-        // .then(user => {
-        //     if(!user){
-        //         return done(null, false, {message: 'User not found'});
-        //     }
-        //     else{
-        //         if(!user.comparePassword(password)) {
-        //             return done(null, false, {message: 'Wrong password'});
-        //         }
-        //         return done(null, user, {message: 'Logged in successfully'});
-        //     }
-        // })
     }
     catch(err){
         console.error(err);
