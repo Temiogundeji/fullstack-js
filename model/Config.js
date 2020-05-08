@@ -1,9 +1,9 @@
-NODE_ENV=development
+require('dotenv').config();
+process.env.NODE_ENV='development';
 
 const Sequelize = require('sequelize');
 const UserModel =  require('./User');
 
-require('dotenv').config();
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PKEY, {
     host: 'localhost',
     dialect: process.env.DIALECT
