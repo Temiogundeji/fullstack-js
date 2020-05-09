@@ -1,7 +1,8 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 // const User = require('../model/User');
-const SeqModel = require('../model/Config')
+const SeqModel = require('../models/Config')
+// const User = require('../models/user');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const BCRYPT_SALT_R = 12;

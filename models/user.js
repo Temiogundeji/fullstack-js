@@ -1,5 +1,6 @@
-
+process.env.NODE_ENV === "test";
 const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('user', {
             email: {
