@@ -6,7 +6,7 @@ const UserModel =  require('./user');
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PKEY, {
     host: 'localhost',
-    dialect: process.env.DIALECT
+    dialect: 'postgres'
 });
 
 const User = UserModel(sequelize, Sequelize.DataTypes);
