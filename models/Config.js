@@ -1,5 +1,5 @@
 require('dotenv').config();
-process.env.NODE_ENV='development';
+process.env.NODE_ENV='test';
 
 const Sequelize = require('sequelize');
 const UserModel =  require('./user');

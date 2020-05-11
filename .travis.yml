@@ -6,10 +6,7 @@ cache:
     - "node_modules"
 install:
   - npm install
-  - npm install -g codecov
-env:
-  global:
-  - NODE_ENV=test
+  - npm install -g codecov                                                                                                         
 script:
   - npm test
   - npm run ci
