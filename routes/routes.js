@@ -26,8 +26,6 @@ router.post('/login', (req, res, next) => {
     passport.authenticate('login', (err, user, info) => {
        try{
             if(err || !user){
-                // const error = new Error('An error occured');
-                // return next(error);
                 res.status(400).json({user: null, message: 'Login unsuccessful, enter the correct username or password!'});
             }
             req.login(user, {session: false}, (error) => {
@@ -44,7 +42,6 @@ router.post('/login', (req, res, next) => {
             });
        }
        catch(err){
-        //    return next(err);
         res.json({error: err, message: 'User login unsuccessful!'});
        }
     })(req, res, next)
