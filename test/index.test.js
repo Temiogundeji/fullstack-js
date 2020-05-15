@@ -81,3 +81,22 @@ describe('/post tests', function() {
         });
     });
 });
+
+// describe('testing user/signup', () => {
+//     it('should return status code 200 when user successfully register', (done) => {
+//         const new_user = {
+//             "email":"midetobi@gmail.com",
+//             "password":"midetobi"
+//         }
+//         chai.request(app)
+//         .post('/user/signup')
+//         .send(new_user)
+//         .end((err, res) => {
+//             res.should.have.status(200);
+//             expect(res.body.message).to.equal('Signup successful');
+//             expect(res.body).to.have.property('session');
+//             expect(res).to.be.json;
+//             done();
+//         })
+//     });
+// });
