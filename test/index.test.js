@@ -146,21 +146,21 @@ describe('testing /user/signup', () => {
     });
 describe('testing /user/login', () => {
     // this.timeout(0);
-    it('should return a response code 200 when user successfully login with correct data', (done) => {
-        const user = {
-            "email": "midetobi@gmail.com",
-            "password": "midetobi"
-        };
+    // it('should return a response code 200 when user successfully login with correct data', (done) => {
+    //     const user = {
+    //         "email": "midetobi@gmail.com",
+    //         "password": "midetobi"
+    //     };
         
-        chai.request(app)
-            .post('/user/login')
-            .send(user)
-            .end((err, res) => {
-                res.should.have.status(200);
-                expect(res).to.be.json;
-                done();
-            });
-        });
+    //     chai.request(app)
+    //         .post('/user/login')
+    //         .send(user)
+    //         .end((err, res) => {
+    //             res.should.have.status(200);
+    //             expect(res).to.be.json;
+    //             done();
+    //         });
+    //     });
     it('should return a response code 400 when login parameter is incorrect data', (done) => {
         const user = {
             "email":"andresiniesta@gmail.com"
