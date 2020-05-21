@@ -4,7 +4,6 @@ node_js:
 services:
 - postgresql
 install:
-- travis_wait 30 mvn install
 - npm install
 - npm install -g codecov
 script:
