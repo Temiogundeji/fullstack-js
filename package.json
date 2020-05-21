@@ -28,7 +28,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha --exit",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "coverage": "nyc npm run test",
     "dev": "nodemon app.js",
