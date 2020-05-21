@@ -7,8 +7,8 @@ const should = chai.should();
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-describe('Testing status code and response type', () =>{
-    it('should return a response code 200 and response type json', (done) => {
+describe(' Testing status code and response type ', () => {
+    it(' should return a response code 200 and response type json ', ( done ) => {
         chai.request(app)
             .get('/')
             .end((err, res) => {
@@ -34,9 +34,9 @@ describe('Testing status code and response type', () =>{
 describe('/post tests', function() {
     it('should return a status code of 200 when correct parameters are set', (done) => {
         const data = {
-            name:'Yusuff',
-            ms:'Single and searching!',
-            about:'I am a Fullstack Software Engineer'
+            name: 'Yusuff',
+            ms: 'Single and searching!',
+            about: 'I am a Fullstack Software Engineer'
         }
         chai.request(app)
         .post('/data')
