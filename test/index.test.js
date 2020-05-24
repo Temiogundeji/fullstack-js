@@ -1,5 +1,6 @@
 process.env.NODE_ENV = 'test';
 const app = require('../app');
+const auth = require('../controller/auth');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');

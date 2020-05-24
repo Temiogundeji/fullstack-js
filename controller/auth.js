@@ -51,7 +51,7 @@ passport.use('login', new localStrategy({
     try{
        const user = await SeqModel.User.findOne({ where: { email:email } });
         if(!user){
-            return done(null, falase, {message: 'User not found!'})
+            return done(null, false, {message: 'User not found!'})
         }
 
         bcrypt.compare(password, user.password)
