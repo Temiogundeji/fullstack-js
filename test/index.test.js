@@ -125,8 +125,8 @@ describe('testing /user/login', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 expect(res).to.be.json;
-                done();
             });
+            done();
         });
     it('should return a response code 400 when login parameter is incorrect data', (done) => {
         const user = {
