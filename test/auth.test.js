@@ -1,18 +1,3 @@
-
-// it('it should not create a user without email address', (done) => {
-//     let new_user = {
-//         email: "John",
-//         password: "Doe",
-//     }
-//       chai.request(app)
-//       .post('/user/signup')
-//       .send(new_user)
-//       .end((err, res) => {
-//             res.should.have.status(200);
-//             res.body.should.be.a('object');
-//         done();
-//       });
-// });
 const app = require('../app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -39,4 +24,19 @@ describe('Signup tests', () => {
         });
         done();
     })
+
+it('it should not create a user without email address', (done) => {
+    let new_user = {
+        email: "",
+        password: "Doe",
+    }
+      chai.request(app)
+      .post('/user/signup')
+      .send(new_user)
+      .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+        done();
+      });
+});
 });
