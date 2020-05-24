@@ -93,6 +93,7 @@ describe('testing /user/signup', () => {
         .send(new_user)
             .end((err, res) => {
                 res.should.have.status(400);
+                res.should.not.have.property('session');
                 done();
             });
         });
@@ -107,6 +108,7 @@ describe('testing /user/signup', () => {
             .send(new_user)
                 .end((err, res) => {
                     res.should.have.status(400);
+                    res.should.not.have.property('session');
                     done();
                 });
             });
@@ -124,6 +126,7 @@ describe('testing /user/login', () => {
             .send(user)
             .end((err, res) => {
                 res.should.have.status(200);
+                res.should.have.property('session').to.be('string');
                 expect(res).to.be.json;
             });
             done();

@@ -3,7 +3,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 const expect = chai.expect;
-
 chai.use(chaiHttp);
 
 describe('Signup tests', () => {
@@ -17,9 +16,14 @@ describe('Signup tests', () => {
         .post('/user/signup')
         .send(new_user)
             .end((err, res) => {
+                if(err){
+                    if(err) {
+                        expect(res).to.have.status(400);
+                    }
+                }
             res.should.have.status(200);
             expect(res.body.message).to.equal('Signup successful');
-            expect(res.body).to.have.property('session');
+            expect(res.body).to.have.property('session').to.be('string');
             expect(res).to.be.json;
         });
         done();
@@ -34,8 +38,11 @@ it('it should not create a user without email address', (done) => {
       .post('/user/signup')
       .send(new_user)
       .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
+            if(err){
+                res.should.have.status(400);
+            }
+            expect(res.body).to.be.an('object');
+            expect(res.body).to.not.have.property('session');
         done();
       });
 });
